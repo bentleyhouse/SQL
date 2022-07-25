@@ -1,0 +1,29 @@
+--Create a store database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, price NUMERIC, file_type TEXT);
+
+INSERT into store VALUES
+(1, "lily pattern", 45, 12.99, "PDF"),
+(2, "daisy pattern", 30, 14.50, "PDF"),
+(3, "monstera pattern", 45, 9.99, "PDF"),
+(4, "hanging plant pattern", 30, 7.50, "jpeg"),
+(5, "tree pattern", 30, 7.50, "PDF"),
+(6, "little tree", 45, 9.99, "PDF"),
+(7, "national parks", 40, 8.50, "jpeg"),
+(8, "RMNP", 30, 7.50, "PDF"),
+(9, "sand dunes", 30, 7.50, "PDF"),
+(10, "carslbad", 30, 7.50, "PDF"),
+(11, "white sands", 30, 8.00, "PDF"),
+(12, "yosemite", 30, 8.00, "PDF"),
+(13, "red woods", 30, 8.50, "PDF"),
+(14, "glacier", 35, 7.00, "PDF"),
+(15, "mount rainer", 30, 8.00, "PDF");
+
+--Display the store database ordered by price.
+SELECT * FROM store ORDER BY price;
+
+--What items have an inventory of over 40?
+SELECT * FROM store WHERE quantity >40;
+
+--What embroidery prints are sold in the file type jpeg?
+SELECT name FROM store WHERE file_type = "jpeg";
