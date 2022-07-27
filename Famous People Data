@@ -1,0 +1,96 @@
+CREATE TABLE famous_people (id INTEGER PRIMARY KEY, name TEXT, spouse_id INTEGER, movie_id INTEGER, song_id INTEGER, book_id INTEGER, tv_show_id INTEGER, country_id INTEGER);
+
+INSERT INTO famous_people VALUES 
+(1, "Joseph Quinn", 0, 0, 0, 0, 1, 2),
+(2, "Natalia Dyer", 4, 1, 0, 0, 1, 1),
+(3, "Millie Bobby Brown", 0, 3, 0, 0, 1, 2),
+(4, "Charlie Heaton", 2, 0, 0, 0, 1, 2),
+(5, "Joe Kerry", 0, 0, 2, 0, 1, 1),
+(6, "David Harbour", 0, 2, 0, 0, 1, 1),
+(7, "Winona Ryder", 0, 0, 0, 0, 1, 1),
+(8, "Tom Hiddleston", 9, 0, 0, 0, 2, 2),
+(9, "Zawe Ashton", 8, 0, 0, 0, 0, 2),
+(10, "Colleen Hoover", 0, 0, 0, 1, 0, 1),
+(11, "Michael J Fox", 0, 4, 0, 0, 0, 1),
+(12, "Josh Kiszka", 0, 0, 1, 0, 0, 1),
+(13, "Sammy Kiszka", 0, 0, 0, 0, 0, 1),
+(14, "Jake Kiszka", 0, 0, 0, 0, 0, 1),
+(15, "Danny Wagner", 0, 0, 0, 0, 0, 1),
+(16, "Tom Cruise", 0, 5, 0, 0, 0, 1),
+(17, "Austin Butler", 0, 6, 0, 0, 0, 1),
+(18, "Zendaya", 19, 7, 0, 0, 0, 1),
+(19, "Tom Holland", 18, 7, 0, 0, 0, 2),
+(20, "J. R. Tolkien", 0, 0, 0, 2, 0, 2);
+
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY, title TEXT, release_year INTEGER);
+
+INSERT INTO movies VALUES
+(1, "Yes, God Yes", 2019),
+(2, "Black Widow", 2021),
+(3, "Enola Holmes", 2020),
+(4, "Back to the Future", 1985),
+(5, "Maverick", 2022),
+(6, "Elvis", 2022),
+(7, "Spiderman No Way Home", 2021);
+
+CREATE TABLE tv_shows (id INTEGER PRIMARY KEY, title TEXT, primary_release_year INTEGER);
+
+INSERT INTO tv_shows VALUES
+(1, "Stranger Things", 2016),
+(2, "Loki", 2021);
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY, title TEXT, release_year INTEGER);
+
+INSERT INTO songs VALUES
+(1, "Light My Love", 2021),
+(2, "Roddy", 2019);
+
+CREATE TABLE books (id INTEGER PRIMARY KEY, title TEXT, release_year INTEGER);
+
+INSERT INTO books VALUES
+(1, "Verity", 2018),
+(2, "The Hobbit", 1937),
+(3, "The Lord of the Rings", 1954);
+
+CREATE TABLE country (id INTEGER PRIMARY KEY, name TEXT);
+
+INSERT INTO country VALUES
+(1, "United States"),
+(2, "United Kingdom");
+
+--Find famous people who's spouse is in data
+SELECT a.name, b.name as "partner name"
+FROM famous_people as a
+JOIN famous_people as b
+ON b.id=a.spouse_id
+ORDER BY a.name;
+
+--Find what famous people in data acted in movies in data
+SELECT famous_people.name as "name", movies.title as "movies acted in" FROM movies
+JOIN famous_people
+ON movies.id=famous_people.movie_id
+ORDER BY famous_people.name;
+
+--Find what famous people in data sang in songs in data
+SELECT famous_people.name as "name", songs.title as "songs sung in" FROM songs
+JOIN famous_people
+ON songs.id=famous_people.song_id;
+
+--Find what famous people in data wrote books in data
+SELECT famous_people.name as "name", books.title as "books written" FROM books
+JOIN famous_people
+ON books.id=famous_people.book_id;
+
+--Find what famous people in data acted in tv shows in data
+SELECT famous_people.name as "name", tv_shows.title as "tv show acted in" FROM tv_shows
+JOIN famous_people
+ON tv_shows.id=famous_people.tv_show_id
+ORDER BY famous_people.name;
+
+--Find what country famous people in data are from
+SELECT famous_people.name, country.name
+FROM famous_people
+JOIN country
+ON famous_people.country_id=country.id
+ORDER BY famous_people.name;
