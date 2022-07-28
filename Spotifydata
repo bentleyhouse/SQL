@@ -1,0 +1,29 @@
+For this project, I downloaded Spotify data from Kaggle.
+I then inserted the Spotify data into a new table and performed analytics on it using SQL.
+
+—First, I determined the average popularity, duration, and tempo by artist and track. 
+SELECT artist_name, track_name, AVG(popularity), AVG(duration_ms), AVG(tempo)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name, track_name;
+
+
+—Next, I determined the top 20 songs based on the “energy” rating.
+SELECT artist_name, track_name, AVG(popularity), AVG(duration_ms), AVG(tempo)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name, track_name;
+
+
+—Next, I determined the top 10 most popular songs. 
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+GROUP BY popularity 
+ORDER BY popularity DESC
+LIMIT 10;
+
+
+—Lastly, I determined the 10 least popular songs in the data set.
+SELECT artist_name, track_name, popularity
+FROM BIT_DB.Spotifydata
+GROUP BY popularity
+ORDER BY popularity ASC
+LIMIT 10;
