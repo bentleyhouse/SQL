@@ -1,0 +1,46 @@
+SELECT count(*) FROM “CharlotteChaze/BreakIntoTech”.”netflix_titles_info”;
+
+--In this SQL code, I am querying a database containing Netflix data. 
+
+
+--How many movies are in the database? (Only movies, not TV shows)
+SELECT
+people.show_id
+,people.director
+,titles.title
+,titles.type
+FROM “CharlotteChaze/BreakIntoTech”.”netflix_people” people
+LEFT JOIN “CharlotteChaze/BreakIntoTech”.”netflix_titles_info” titles
+ON people.show_id=titles.show_id;
+
+
+--When was the most recent batch of movies and tv shows added to the database?
+SELECT COUNT (*) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type='Movie';
+SELECT MAX (date(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+
+--List all the movies and TV shows in alphabetical order.
+SELECT title
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY title ASC;
+
+
+--Who was the director of the movie "Bright Star"?
+SELECT director
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" people
+LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" titles
+ON people.show_id=titles.show_id
+WHERE titles.title='Bright Star';
+
+
+--What is the oldest movie in the database and what year was it released?
+SELECT title, release_year
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie'
+AND release_year <= 
+(SELECT MIN(release_year) 
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie');
